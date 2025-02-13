@@ -3,7 +3,7 @@ package com.boardgame.demo.Users;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(UserCreationParams params) {
