@@ -42,7 +42,7 @@ class UserServiceImpl implements UserService {
     @Override
     public UserDto update(String id, UserCreationParams params) {
         String userId = UUID.fromString(id).toString();
-        UserDto userDto = new UserDto(userId, params.getEmail(), params.getPassword());
+        UserDto userDto = new UserDto(userId, params.getEmail());
         return userDao.upsert(userDto);
     }
 

@@ -4,12 +4,10 @@ package com.boardgame.demo.Users;
 public class UserDto {
     private String id;
     private String email;
-    private String password;
 
-    public UserDto(String id, String email, String password) {
+    public UserDto(String id, String email) {
         this.id = id;
         this.email = email;
-        this.password = password;
     }
 
     public String getId() {
@@ -18,9 +16,5 @@ public class UserDto {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

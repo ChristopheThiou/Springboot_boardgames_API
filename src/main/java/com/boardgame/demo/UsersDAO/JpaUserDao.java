@@ -40,13 +40,12 @@ public class JpaUserDao implements UserDao {
     }
 
     private UserDto toDto(UserEntity userEntity) {
-        return new UserDto(userEntity.id, userEntity.email, userEntity.password);
+        return new UserDto(userEntity.id, userEntity.email);
     }
 
     private UserEntity toEntity(UserDto userDto) {
         UserEntity userEntity = new UserEntity();
         userEntity.email = userDto.getEmail();
-        userEntity.password = userDto.getPassword();
         return userEntity;
     }
 }
