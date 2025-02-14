@@ -3,6 +3,8 @@ package com.boardgame.demo.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 public class UserController {
 
@@ -16,7 +18,12 @@ public class UserController {
 
     @GetMapping("/users/{userId}")
     public UserDto getUser(@PathVariable String userId) {
-        return userService.get(userId);
+        try {
+            UUID uuid = UUID.fromString(userId);
+            return userService.get(uuid.toString());
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid UUID string: " + userId);
+        }
     }
 
     @GetMapping("/users")
@@ -24,13 +31,23 @@ public class UserController {
         return userService.getByEmail(email);
     }
 
-    @DeleteMapping("/users/{userId}")
+    @DeleteMapping("/users/delete/{userId}")
     public void deleteUser(@PathVariable String userId) {
-        userService.delete(userId);
+        try {
+            UUID uuid = UUID.fromString(userId);
+            userService.delete(uuid.toString());
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid UUID string: " + userId);
+        }
     }
 
-    @PutMapping("/users/{userId}")
+    @PutMapping("/users/patch/{userId}")
     public UserDto updateUser(@PathVariable String userId, @RequestBody UserCreationParams params) {
-        return userService.update(userId, params);
+        try {
+            UUID uuid = UUID.fromString(userId);
+            return userService.update(uuid.toString(), params);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid UUID string: " + userId);
+        }
     }
 }
