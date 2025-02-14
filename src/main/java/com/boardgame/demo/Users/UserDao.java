@@ -1,10 +1,8 @@
-package com.boardgame.demo.UsersDAO;
+package com.boardgame.demo.Users;
 
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
-
-import com.boardgame.demo.Users.UserDto;
 
 import jakarta.validation.constraints.NotNull;
 

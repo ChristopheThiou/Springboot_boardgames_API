@@ -7,8 +7,6 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.boardgame.demo.UsersDAO.UserDao;
-
 import jakarta.validation.constraints.NotNull;
 
 @Service

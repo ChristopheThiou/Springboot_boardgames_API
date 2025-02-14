@@ -3,6 +3,7 @@ package com.boardgame.demo.UsersDAO;
 import java.util.*;
 import java.util.stream.Stream;
 
+import com.boardgame.demo.Users.UserDao;
 import com.boardgame.demo.Users.UserDto;
 
 import jakarta.validation.constraints.NotNull;
