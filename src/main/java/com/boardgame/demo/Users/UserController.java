@@ -18,4 +18,19 @@ public class UserController {
     public UserDto getUser(@PathVariable String userId) {
         return userService.get(userId);
     }
+
+    @GetMapping("/users")
+    public UserDto getUserByEmail(@RequestParam String email) {
+        return userService.getByEmail(email);
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public void deleteUser(@PathVariable String userId) {
+        userService.delete(userId);
+    }
+
+    @PutMapping("/users/{userId}")
+    public UserDto updateUser(@PathVariable String userId, @RequestBody UserCreationParams params) {
+        return userService.update(userId, params);
+    }
 }
