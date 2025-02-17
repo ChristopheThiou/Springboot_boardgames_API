@@ -25,13 +25,17 @@ public class InMemoryUserDao implements UserDao {
     }
 
     @Override
-    public void deleteById(@NotNull UUID userId) {
-        users.remove(userId);
+    public void deleteById(@NotNull String userId) {
+        users.remove(UUID.fromString(userId));
     }
 
     @Override
     public Optional<User> findById(@NotNull String userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        try {
+            UUID uuid = UUID.fromString(userId);
+            return Optional.ofNullable(users.get(uuid));
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
     }
 }

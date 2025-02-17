@@ -1,6 +1,7 @@
 package com.boardgame.demo.Users;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -12,7 +13,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/users")
-    public User createUser(@RequestBody UserCreationParams params) {
+    public User createUser(@RequestBody @Validated UserCreationParams params) {
         return userService.create(params);
     }
 
@@ -24,11 +25,6 @@ public class UserController {
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Invalid UUID string: " + userId);
         }
-    }
-
-    @GetMapping("/users")
-    public User getUserByEmail(@RequestParam String email) {
-        return userService.getByEmail(email);
     }
 
     @DeleteMapping("/users/delete/{userId}")

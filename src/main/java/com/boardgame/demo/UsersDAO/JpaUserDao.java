@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import jakarta.validation.constraints.NotNull;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Stream;
 
 @Repository
@@ -35,8 +34,8 @@ public class JpaUserDao implements UserDao {
     }
 
     @Override
-    public void deleteById(@NotNull UUID userId) {
-        userEntityRepository.deleteById(userId.toString());
+    public void deleteById(@NotNull String userId) {
+        userEntityRepository.deleteById(userId);
     }
 
     private User toDto(UserEntity userEntity) {
@@ -45,7 +44,9 @@ public class JpaUserDao implements UserDao {
 
     private UserEntity toEntity(User userDto) {
         UserEntity userEntity = new UserEntity();
+        userEntity.id = userDto.getId();
         userEntity.email = userDto.getEmail();
+        userEntity.password = userDto.getPassword();
         return userEntity;
     }
 }

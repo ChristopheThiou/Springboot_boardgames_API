@@ -1,6 +1,5 @@
 package com.boardgame.demo.Users;
 
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -17,8 +16,9 @@ class UserServiceImpl implements UserService {
 
     @Override
     public User create(UserCreationParams params) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        String userId = UUID.randomUUID().toString();
+        User user = new User(userId, params.getEmail(), params.getPassword());
+        return userDao.upsert(user);
     }
 
     @Override
@@ -28,32 +28,19 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByEmail(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getByEmail'");
-    }
-
-    @Override
     public void delete(String id) {
-        UUID userId = UUID.fromString(id);
-        userDao.deleteById(userId);
+        userDao.deleteById(id);
     }
 
     @Override
     public User update(String id, UserCreationParams params) {
-        String userId = UUID.fromString(id).toString();
-        User userDto = new User(userId, params.getEmail(), params.getPassword());
-        return userDao.upsert(userDto);
+        User user = new User(id, params.getEmail(), params.getPassword());
+        return userDao.upsert(user);
     }
 
     @Override
     public @NotNull Stream<User> findAll() {
         return userDao.findAll();
-    }
-
-    @Override
-    public Optional<User> findById(@NotNull String userId) {
-        return userDao.findById(userId);
     }
 
     @Override
