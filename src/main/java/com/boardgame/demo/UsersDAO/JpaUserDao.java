@@ -1,7 +1,6 @@
 package com.boardgame.demo.UsersDAO;
 
-import com.boardgame.demo.Users.UserDao;
-import com.boardgame.demo.Users.UserDto;
+import com.boardgame.demo.Users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,18 +16,18 @@ public class JpaUserDao implements UserDao {
     private UserEntityRepository userEntityRepository;
 
     @Override
-    public @NotNull Stream<UserDto> findAll() {
+    public @NotNull Stream<User> findAll() {
         return userEntityRepository.findAll().stream().map(this::toDto);
     }
 
     @Override
-    public Optional<UserDto> findById(@NotNull String userId) {
+    public Optional<User> findById(@NotNull String userId) {
         
         return userEntityRepository.findById(userId).map(this::toDto);
     }
 
     @Override
-    public @NotNull UserDto upsert(@NotNull UserDto userDto) {
+    public @NotNull User upsert(@NotNull User userDto) {
         UserEntity userEntity = toEntity(userDto);
         userEntity = userEntityRepository.save(userEntity);
         return toDto(userEntity);
@@ -39,11 +38,11 @@ public class JpaUserDao implements UserDao {
         userEntityRepository.deleteById(userId.toString());
     }
 
-    private UserDto toDto(UserEntity userEntity) {
-        return new UserDto(userEntity.id, userEntity.email);
+    private User toDto(UserEntity userEntity) {
+        return new User(userEntity.id, userEntity.email);
     }
 
-    private UserEntity toEntity(UserDto userDto) {
+    private UserEntity toEntity(User userDto) {
         UserEntity userEntity = new UserEntity();
         userEntity.email = userDto.getEmail();
         return userEntity;

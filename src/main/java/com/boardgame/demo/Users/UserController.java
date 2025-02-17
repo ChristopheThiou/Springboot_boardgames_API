@@ -12,12 +12,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/users")
-    public UserDto createUser(@RequestBody UserCreationParams params) {
+    public User createUser(@RequestBody UserCreationParams params) {
         return userService.create(params);
     }
 
     @GetMapping("/users/{userId}")
-    public UserDto getUser(@PathVariable String userId) {
+    public User getUser(@PathVariable String userId) {
         try {
             UUID uuid = UUID.fromString(userId);
             return userService.get(uuid.toString());
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public UserDto getUserByEmail(@RequestParam String email) {
+    public User getUserByEmail(@RequestParam String email) {
         return userService.getByEmail(email);
     }
 
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PutMapping("/users/patch/{userId}")
-    public UserDto updateUser(@PathVariable String userId, @RequestBody UserCreationParams params) {
+    public User updateUser(@PathVariable String userId, @RequestBody UserCreationParams params) {
         try {
             UUID uuid = UUID.fromString(userId);
             return userService.update(uuid.toString(), params);

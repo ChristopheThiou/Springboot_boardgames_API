@@ -7,6 +7,8 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boardgame.demo.UsersDAO.UserDao;
+
 import jakarta.validation.constraints.NotNull;
 
 @Service
@@ -16,19 +18,19 @@ class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public UserDto create(UserCreationParams params) {
+    public User create(UserCreationParams params) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'create'");
     }
 
     @Override
-    public UserDto get(String id) {
-        UserDto user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+    public User get(String id) {
+        User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         return user;
     }
 
     @Override
-    public UserDto getByEmail(String email) {
+    public User getByEmail(String email) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getByEmail'");
     }
@@ -40,24 +42,24 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto update(String id, UserCreationParams params) {
+    public User update(String id, UserCreationParams params) {
         String userId = UUID.fromString(id).toString();
-        UserDto userDto = new UserDto(userId, params.getEmail());
+        User userDto = new User(userId, params.getEmail());
         return userDao.upsert(userDto);
     }
 
     @Override
-    public @NotNull Stream<UserDto> findAll() {
+    public @NotNull Stream<User> findAll() {
         return userDao.findAll();
     }
 
     @Override
-    public Optional<UserDto> findById(@NotNull String userId) {
+    public Optional<User> findById(@NotNull String userId) {
         return userDao.findById(userId);
     }
 
     @Override
-    public @NotNull UserDto upsert(@NotNull UserDto user) {
+    public @NotNull User upsert(@NotNull User user) {
         return userDao.upsert(user);
     }
 }
