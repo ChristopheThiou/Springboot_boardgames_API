@@ -1,10 +1,14 @@
 package com.boardgame.demo.Users;
 
-public class UserDto {
-    private String id;
-    private String email;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-    public UserDto(String id, String email) {
+public class UserDto {
+    private @NotNull @Size(min = 36, max = 36) String id;
+    private @NotNull @Email String email;
+
+    public UserDto(@NotNull @Size(min = 36, max = 36) String id, @NotNull @Email String email) {
         this.id = id;
         this.email = email;
     }

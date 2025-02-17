@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.UUID;
 
 @RestController
+@Validated
 public class UserController {
 
     @Autowired
@@ -18,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public User getUser(@PathVariable String userId) {
+    public User getUser(@PathVariable @NotNull @Size(min = 36, max = 36) String userId) {
         try {
             UUID uuid = UUID.fromString(userId);
             return userService.get(uuid.toString());
@@ -28,7 +31,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/delete/{userId}")
-    public void deleteUser(@PathVariable String userId) {
+    public void deleteUser(@PathVariable @NotNull @Size(min = 36, max = 36) String userId) {
         try {
             UUID uuid = UUID.fromString(userId);
             userService.delete(uuid.toString());
@@ -38,7 +41,7 @@ public class UserController {
     }
 
     @PutMapping("/users/patch/{userId}")
-    public User updateUser(@PathVariable String userId, @RequestBody UserCreationParams params) {
+    public User updateUser(@PathVariable @NotNull @Size(min = 36, max = 36) String userId, @RequestBody @Validated UserCreationParams params) {
         try {
             UUID uuid = UUID.fromString(userId);
             return userService.update(uuid.toString(), params);

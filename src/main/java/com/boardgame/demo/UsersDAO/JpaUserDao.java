@@ -5,8 +5,10 @@ import com.boardgame.demo.Users.UserDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -22,19 +24,19 @@ public class JpaUserDao implements UserDao {
     }
 
     @Override
-    public Optional<User> findById(@NotNull String userId) {
+    public Optional<User> findById(@NotNull @Size(min = 36, max = 36) String userId) {
         return userEntityRepository.findById(userId).map(this::toDto);
     }
 
     @Override
-    public @NotNull User upsert(@NotNull User userDto) {
+    public @NotNull User upsert(@Validated @NotNull User userDto) {
         UserEntity userEntity = toEntity(userDto);
         userEntity = userEntityRepository.save(userEntity);
         return toDto(userEntity);
     }
 
     @Override
-    public void deleteById(@NotNull String userId) {
+    public void deleteById(@NotNull @Size(min = 36, max = 36) String userId) {
         userEntityRepository.deleteById(userId);
     }
 
