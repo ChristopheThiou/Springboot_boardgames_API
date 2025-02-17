@@ -1,6 +1,8 @@
 package com.boardgame.demo.UsersDAO;
 
 import com.boardgame.demo.Users.User;
+import com.boardgame.demo.Users.UserDao;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,7 +41,7 @@ public class JpaUserDao implements UserDao {
     }
 
     private User toDto(UserEntity userEntity) {
-        return new User(userEntity.id, userEntity.email);
+        return new User(userEntity.id, userEntity.email, userEntity.password);
     }
 
     private UserEntity toEntity(User userDto) {

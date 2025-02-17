@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import com.boardgame.demo.Users.User;
+import com.boardgame.demo.Users.UserDao;
 
 import jakarta.validation.constraints.NotNull;
 

@@ -7,8 +7,6 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.boardgame.demo.UsersDAO.UserDao;
-
 import jakarta.validation.constraints.NotNull;
 
 @Service
@@ -44,7 +42,7 @@ class UserServiceImpl implements UserService {
     @Override
     public User update(String id, UserCreationParams params) {
         String userId = UUID.fromString(id).toString();
-        User userDto = new User(userId, params.getEmail());
+        User userDto = new User(userId, params.getEmail(), params.getPassword());
         return userDao.upsert(userDto);
     }
 
