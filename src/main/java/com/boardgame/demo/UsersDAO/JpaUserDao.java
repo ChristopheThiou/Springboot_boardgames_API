@@ -24,7 +24,6 @@ public class JpaUserDao implements UserDao {
 
     @Override
     public Optional<User> findById(@NotNull String userId) {
-        
         return userEntityRepository.findById(userId).map(this::toDto);
     }
 
