@@ -1,8 +1,12 @@
-package com.boardgame.demo.Users;
+package com.boardgame.demo.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import com.boardgame.demo.Dto.UserCreationParams;
+import com.boardgame.demo.Service.UserService;
+import com.boardgame.demo.Users.User;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

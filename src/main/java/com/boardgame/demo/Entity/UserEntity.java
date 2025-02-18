@@ -1,4 +1,4 @@
-package com.boardgame.demo.UsersDAO;
+package com.boardgame.demo.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

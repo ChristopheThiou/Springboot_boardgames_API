@@ -1,9 +1,10 @@
-package com.boardgame.demo.UsersDAO;
+package com.boardgame.demo.Dao;
 
+import com.boardgame.demo.Entity.UserEntity;
 import com.boardgame.demo.Users.User;
-import com.boardgame.demo.Users.UserDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 @Repository
+@Primary
 public class JpaUserDao implements UserDao {
 
     @Autowired
