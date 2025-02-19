@@ -1,18 +1,19 @@
 package com.boardgame.demo.Service;
 
+import com.boardgame.demo.Dao.UserDao;
+import com.boardgame.demo.Dto.UserCreationParams;
+import com.boardgame.demo.Dto.UserDto;
+import com.boardgame.demo.Users.User;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.UUID;
 import java.util.stream.Stream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.boardgame.demo.Dao.UserDao;
-import com.boardgame.demo.Dto.UserCreationParams;
-import com.boardgame.demo.Users.User;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 
 @Service
 class UserServiceImpl implements UserService {
@@ -21,16 +22,16 @@ class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User create(@Validated @NotNull UserCreationParams params) {
+    public UserDto create(@Validated @NotNull UserCreationParams params) {
         String userId = UUID.randomUUID().toString();
         User user = new User(userId, params.getEmail(), params.getPassword());
-        return userDao.upsert(user);
+        return toDto(userDao.upsert(user));
     }
 
     @Override
-    public User get(@NotNull @Size(min = 36, max = 36) String id) {
+    public UserDto get(@NotNull @Size(min = 36, max = 36) String id) {
         User user = userDao.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        return user;
+        return toDto(user);
     }
 
     @Override
@@ -39,9 +40,9 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(@NotNull @Size(min = 36, max = 36) String id, @Validated@NotNull UserCreationParams params) {
+    public UserDto update(@NotNull @Size(min = 36, max = 36) String id, @Validated@NotNull UserCreationParams params) {
         User user = new User(id, params.getEmail(), params.getPassword());
-        return userDao.upsert(user);
+        return toDto(userDao.upsert(user));
     }
 
     @Override
@@ -50,7 +51,11 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    public @NotNull User upsert(@Validated @NotNull User user) {
-        return userDao.upsert(user);
+    public @NotNull UserDto upsert(@Validated @NotNull User user) {
+        return toDto(userDao.upsert(user));
+    }
+
+    private UserDto toDto(User user) {
+        return new UserDto(user.getId(), user.getEmail());
     }
 }
