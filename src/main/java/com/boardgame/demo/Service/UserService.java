@@ -16,6 +16,6 @@ public interface UserService {
     @NotNull UserDto get(@NotNull @Size(min = 36, max = 36) String id);
     void delete(@NotNull @Size(min = 36, max = 36) String id);
     @NotNull UserDto update(@NotNull @Size(min = 36, max = 36) String id, @Validated@NotNull UserCreationParams params);
-    @NotNull Stream<User> findAll();
+    @NotNull Stream<UserDto> findAll();
     @NotNull UserDto upsert(@Validated@NotNull User user);
 }

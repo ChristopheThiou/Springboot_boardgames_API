@@ -12,9 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-
-
-
 @Service
 class UserServiceImpl implements UserService {
 
@@ -40,14 +37,14 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto update(@NotNull @Size(min = 36, max = 36) String id, @Validated@NotNull UserCreationParams params) {
+    public UserDto update(@NotNull @Size(min = 36, max = 36) String id, @Validated @NotNull UserCreationParams params) {
         User user = new User(id, params.getEmail(), params.getPassword());
         return toDto(userDao.upsert(user));
     }
 
     @Override
-    public @NotNull Stream<User> findAll() {
-        return userDao.findAll();
+    public @NotNull Stream<UserDto> findAll() {
+        return userDao.findAll().map(this::toDto);
     }
 
     @Override
