@@ -32,7 +32,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/users/delete/{userId}")
+    @DeleteMapping("/users/{userId}")
     public void deleteUser(@PathVariable @NotNull @Size(min = 36, max = 36) String userId) {
         try {
             UUID uuid = UUID.fromString(userId);
@@ -42,7 +42,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/users/patch/{userId}")
+    @PutMapping("/users/{userId}")
     public UserDto updateUser(@PathVariable @NotNull @Size(min = 36, max = 36) String userId, @RequestBody @Validated UserCreationParams params) {
         try {
             UUID uuid = UUID.fromString(userId);
