@@ -1,9 +1,10 @@
-package com.boardgame.demo.Dao;
+package com.boardgame.demo.dao;
 
+import com.boardgame.demo.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.boardgame.demo.Entity.UserEntity;
+
 
 @Repository
 public interface UserEntityRepository extends JpaRepository<UserEntity, String> {

@@ -1,4 +1,4 @@
-package com.boardgame.demo.Heartbeat;
+package com.boardgame.demo.heartbeat;
 
 import org.springframework.stereotype.Service;
 

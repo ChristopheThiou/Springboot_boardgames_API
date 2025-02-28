@@ -1,14 +1,16 @@
-package com.boardgame.demo.Controller;
+package com.boardgame.demo.controller;
 
-import com.boardgame.demo.Dto.UserCreationParams;
-import com.boardgame.demo.Dto.UserDto;
-import com.boardgame.demo.Service.UserService;
+import com.boardgame.demo.dto.UserDto;
+import com.boardgame.demo.dto.UserCreationParams;
+import com.boardgame.demo.service.UserService;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+
 
 @RestController
 @Validated

@@ -1,13 +1,6 @@
-package com.boardgame.demo.Dao;
+package com.boardgame.demo.dao;
 
-import com.boardgame.demo.Users.User;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Repository;
-
+import com.boardgame.demo.users.User;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -16,6 +9,14 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Repository;
+
+
+
 
 @Repository
 public class JdbcUserDao implements UserDao {

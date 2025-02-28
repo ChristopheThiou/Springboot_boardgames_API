@@ -1,4 +1,4 @@
-package com.boardgame.demo.Entity;
+package com.boardgame.demo.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

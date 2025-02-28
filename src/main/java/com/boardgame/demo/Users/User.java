@@ -1,4 +1,4 @@
-package com.boardgame.demo.Users;
+package com.boardgame.demo.users;
 
 public class User {
     private String id;

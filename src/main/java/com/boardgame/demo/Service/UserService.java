@@ -1,12 +1,14 @@
-package com.boardgame.demo.Service;
+package com.boardgame.demo.service;
 
-import com.boardgame.demo.Dto.UserCreationParams;
-import com.boardgame.demo.Dto.UserDto;
-import com.boardgame.demo.Users.User;
+import com.boardgame.demo.dto.UserCreationParams;
+import com.boardgame.demo.dto.UserDto;
+import com.boardgame.demo.users.User;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.stream.Stream;
 import org.springframework.validation.annotation.Validated;
+
+
 
 
 

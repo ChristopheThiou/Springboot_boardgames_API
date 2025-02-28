@@ -1,17 +1,19 @@
-package com.boardgame.demo.Dao;
+package com.boardgame.demo.dao;
 
-import com.boardgame.demo.Entity.UserEntity;
-import com.boardgame.demo.Users.User;
-
+import com.boardgame.demo.entity.UserEntity;
+import com.boardgame.demo.users.User;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import java.util.Optional;
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import java.util.Optional;
-import java.util.stream.Stream;
+
+
+
 
 @Repository
 @Primary

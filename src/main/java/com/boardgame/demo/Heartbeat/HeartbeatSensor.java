@@ -1,4 +1,4 @@
-package com.boardgame.demo.Heartbeat;
+package com.boardgame.demo.heartbeat;
 
 public interface HeartbeatSensor {
     int get();

@@ -1,4 +1,4 @@
-package com.boardgame.demo.Heartbeat;
+package com.boardgame.demo.heartbeat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
