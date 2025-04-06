@@ -9,10 +9,6 @@ import java.util.stream.Stream;
 import org.springframework.validation.annotation.Validated;
 
 
-
-
-
-
 public interface UserService {
     @NotNull UserDto create(@Validated @NotNull UserCreationParams params);
     @NotNull UserDto get(@NotNull @Size(min = 36, max = 36) String id);
@@ -20,4 +16,5 @@ public interface UserService {
     @NotNull UserDto update(@NotNull @Size(min = 36, max = 36) String id, @Validated@NotNull UserCreationParams params);
     @NotNull Stream<UserDto> findAll();
     @NotNull UserDto upsert(@Validated@NotNull User user);
+    UserDto getUserByEmailAndPassword(@NotNull String email, @NotNull String password);
 }

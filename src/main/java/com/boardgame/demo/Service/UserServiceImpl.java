@@ -9,10 +9,9 @@ import jakarta.validation.constraints.Size;
 import java.util.UUID;
 import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-
-
 
 
 @Service
@@ -21,10 +20,16 @@ class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     @Override
     public UserDto create(@Validated @NotNull UserCreationParams params) {
         String userId = UUID.randomUUID().toString();
-        User user = new User(userId, params.getEmail(), params.getPassword());
+        String encodedPassword = passwordEncoder.encode(params.getPassword());
+     
+        User user = new User(userId, params.getEmail(), encodedPassword);
         return toDto(userDao.upsert(user));
     }
 
@@ -41,7 +46,8 @@ class UserServiceImpl implements UserService {
 
     @Override
     public UserDto update(@NotNull @Size(min = 36, max = 36) String id, @Validated @NotNull UserCreationParams params) {
-        User user = new User(id, params.getEmail(), params.getPassword());
+        String encodedPassword = passwordEncoder.encode(params.getPassword());
+        User user = new User(id, params.getEmail(), encodedPassword);
         return toDto(userDao.upsert(user));
     }
 
@@ -57,5 +63,11 @@ class UserServiceImpl implements UserService {
 
     private UserDto toDto(User user) {
         return new UserDto(user.getId(), user.getEmail());
+    }
+
+    @Override
+    public UserDto getUserByEmailAndPassword(String email, String password) {
+        User user = userDao.getUserByEmailAndPassword(email, password);
+        return toDto(user);
     }
 }

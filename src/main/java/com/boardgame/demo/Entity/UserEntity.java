@@ -11,13 +11,47 @@ public class UserEntity {
     @Id
     @NotNull
     @Size(min = 36, max = 36)
-    public String id;
+    private String id;
 
     @NotNull
     @Email
-    public String email;
+    private String email;
 
     @NotNull
     @Size(min = 8, max = 100)
-    public String password;
+    private String password;
+
+    private String role;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRoles() {
+        return role;
+    }
+
+    public void setRoles(String roles) {
+        this.role = roles;
+    }
 }

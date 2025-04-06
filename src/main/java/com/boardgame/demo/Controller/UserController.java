@@ -1,7 +1,7 @@
 package com.boardgame.demo.controller;
 
-import com.boardgame.demo.dto.UserDto;
 import com.boardgame.demo.dto.UserCreationParams;
+import com.boardgame.demo.dto.UserDto;
 import com.boardgame.demo.service.UserService;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -10,21 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-
-
 @RestController
 @Validated
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/users")
+    @PostMapping
     public UserDto createUser(@RequestBody @Validated UserCreationParams params) {
         return userService.create(params);
     }
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/{userId}")
     public UserDto getUser(@PathVariable @NotNull @Size(min = 36, max = 36) String userId) {
         try {
             UUID uuid = UUID.fromString(userId);
@@ -34,7 +33,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/users/{userId}")
+    @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable @NotNull @Size(min = 36, max = 36) String userId) {
         try {
             UUID uuid = UUID.fromString(userId);
@@ -44,7 +43,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/users/{userId}")
+    @PutMapping("/{userId}")
     public UserDto updateUser(@PathVariable @NotNull @Size(min = 36, max = 36) String userId, @RequestBody @Validated UserCreationParams params) {
         try {
             UUID uuid = UUID.fromString(userId);

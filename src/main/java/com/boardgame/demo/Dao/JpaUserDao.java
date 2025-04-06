@@ -11,10 +11,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 
-
-
-
-
 @Repository
 @Primary
 public class JpaUserDao implements UserDao {
@@ -45,14 +41,19 @@ public class JpaUserDao implements UserDao {
     }
 
     private User toDto(UserEntity userEntity) {
-        return new User(userEntity.id, userEntity.email, userEntity.password);
+        return new User(userEntity.getId(), userEntity.getEmail(), userEntity.getPassword(), userEntity.getRoles());
     }
 
     private UserEntity toEntity(User userDto) {
         UserEntity userEntity = new UserEntity();
-        userEntity.id = userDto.getId();
-        userEntity.email = userDto.getEmail();
-        userEntity.password = userDto.getPassword();
+        userEntity.setId(userDto.getId());
+        userEntity.setEmail(userDto.getEmail());
+        userEntity.setPassword(userDto.getPassword());
         return userEntity;
+    }
+
+    @Override
+    public User getUserByEmailAndPassword(@NotNull String email, @NotNull String password) {
+        return userEntityRepository.findByEmailAndPassword(email, password).map(this::toDto).orElse(null);
     }
 }

@@ -30,7 +30,8 @@ public class JdbcUserDao implements UserDao {
             return new User(
                 rs.getString("id"),
                 rs.getString("email"),
-                rs.getString("password")
+                rs.getString("password"),
+                rs.getString("token")
             );
         }
     };
@@ -68,5 +69,14 @@ public class JdbcUserDao implements UserDao {
     @Override
     public void deleteById(@NotNull @Size(min = 36, max = 36) String userId) {
         jdbcTemplate.update("DELETE FROM user_entity WHERE id = ?", userId);
+    }
+
+    @Override
+    public User getUserByEmailAndPassword(@NotNull String email, @NotNull String password) {
+        return jdbcTemplate.queryForObject(
+            "SELECT * FROM user_entity WHERE email = ? AND password = ?",
+            userRowMapper,
+            email, password
+        );
     }
 }

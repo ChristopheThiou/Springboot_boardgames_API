@@ -19,4 +19,6 @@ public interface UserDao {
     @NotNull User upsert(@Validated @NotNull User user);
     
     void deleteById(@NotNull @Size(min = 36, max = 36) String userId);
+
+    User getUserByEmailAndPassword(@NotNull String email, @NotNull String password);
 }

@@ -41,4 +41,12 @@ public class InMemoryUserDao implements UserDao {
             return Optional.empty();
         }
     }
+
+    @Override
+    public User getUserByEmailAndPassword(@NotNull String email, @NotNull String password) {
+        return users.values().stream()
+            .filter(user -> user.getEmail().equals(email) && user.getPassword().equals(password))
+            .findFirst()
+            .orElse(null);
+    }
 }
